@@ -1,5 +1,5 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import { Button, ButtonGroup, Card, Checkbox, CheckboxGroup, Flex, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, useDisclosure,  } from '@chakra-ui/react';
+import { Button, ButtonGroup, Card, Checkbox, CheckboxGroup, Flex, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, useDisclosure, useToast,  } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ImPencil2 } from 'react-icons/im';
@@ -12,7 +12,7 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
   const [degree,setDegree] =useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedDegree,setSelectedDegrees]=useState([]);
-
+  const toast=useToast()
 
   const handleEdit=()=>{
     if(!isInputActive){
@@ -49,12 +49,21 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
   const handleSave =async ()=>{
 
     const updateDegree={...subject, degree:selectedDegree};
-    console.log(updateDegree,'añadiendo grado');
+    // console.log(updateDegree,'añadiendo grado');
     try {
-      // const {data}= await axios.patch(`/api/subjects/${subject.id}`,{degree:selectedDegree?.id});
+    
       const {data}= await axios.patch(`/api/subjects/${subject.id}`,updateDegree);
-      
-      console.log(data);
+      console.log(data);      
+      // cerrando 
+      onClose();
+      toast({
+        title: 'Asignacion de grado a la asignatura !',
+        description:data.name,
+        status:'success',
+        duration: 3000,
+        isClosable: true,
+      })
+
       
     } catch (error) {
       console.log(error);
@@ -66,7 +75,7 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
     setSelectedDegrees(gradesSelected);
   };
 
-  console.log('agregando !!',selectedDegree);
+  // console.log('agregando !!',selectedDegree);
   
 
   return (

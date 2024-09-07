@@ -31,17 +31,18 @@ import {
 } from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
-import { IoIosPersonAdd } from 'react-icons/io';
-import { FcFile } from 'react-icons/fc';
+import { IoMdPersonAdd } from 'react-icons/io';
 import { MdMedicalServices } from 'react-icons/md';
+import { LuBookMinus } from 'react-icons/lu';
+import { GiTeacher } from 'react-icons/gi';
 
 // menu lateral
 const LinkItems = [
   { name: 'Home', icon: FiHome,to:'/dashboard' },
   { name: 'Grado', icon: MdMedicalServices ,to:'/grado' },
-  { name: 'Asignaturas', icon: IoIosPersonAdd,to:'/asignaturas' },
-  { name: 'Maestro', icon: FcFile, },
-  { name: 'Inscripcion', },
+  { name: 'Asignaturas', icon: LuBookMinus, to:'/asignaturas' },
+  { name: 'Maestro', icon: GiTeacher, },
+  { name: 'Inscripcion',icon: IoMdPersonAdd  , to:'/StudentRegistration' },
   { name: 'Asignaciones'},
   { name: 'alumnos'},
   { name: 'Expediente'},

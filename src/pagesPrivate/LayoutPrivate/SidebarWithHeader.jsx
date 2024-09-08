@@ -35,6 +35,7 @@ import { IoMdPersonAdd } from 'react-icons/io';
 import { MdMedicalServices } from 'react-icons/md';
 import { LuBookMinus } from 'react-icons/lu';
 import { GiTeacher } from 'react-icons/gi';
+import { PiStudentFill } from 'react-icons/pi';
 
 // menu lateral
 const LinkItems = [
@@ -44,7 +45,7 @@ const LinkItems = [
   { name: 'Maestro', icon: GiTeacher, },
   { name: 'Inscripcion',icon: IoMdPersonAdd  , to:'/StudentRegistration' },
   { name: 'Asignaciones'},
-  { name: 'alumnos'},
+  { name: 'alumnos',icon:PiStudentFill},
   { name: 'Expediente'},
   { name: 'Notas'},
 ];

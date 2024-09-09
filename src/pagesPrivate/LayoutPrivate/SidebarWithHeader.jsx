@@ -33,21 +33,22 @@ import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { MdMedicalServices } from 'react-icons/md';
-import { LuBookMinus } from 'react-icons/lu';
-import { GiTeacher } from 'react-icons/gi';
+import { LuBookMinus, LuSchool } from 'react-icons/lu';
+import { GiSpellBook, GiTeacher } from 'react-icons/gi';
 import { PiStudentFill } from 'react-icons/pi';
+import { FcFinePrint } from 'react-icons/fc';
 
 // menu lateral
 const LinkItems = [
   { name: 'Home', icon: FiHome,to:'/dashboard' },
-  { name: 'Grado', icon: MdMedicalServices ,to:'/grado' },
+  { name: 'Grado', icon: LuSchool   ,to:'/grado' },
   { name: 'Asignaturas', icon: LuBookMinus, to:'/asignaturas' },
   { name: 'Maestro', icon: GiTeacher, },
   { name: 'Inscripcion',icon: IoMdPersonAdd  , to:'/StudentRegistration' },
-  { name: 'Asignaciones'},
+  { name: 'Asignaciones',icon:GiSpellBook },
   { name: 'alumnos',icon:PiStudentFill},
   { name: 'Expediente'},
-  { name: 'Notas'},
+  { name: 'Notas',icon:FcFinePrint },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {

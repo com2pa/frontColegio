@@ -1,6 +1,8 @@
-import { Button, Card, Checkbox, CheckboxGroup, Flex, FormControl, FormHelperText, FormLabel, Input, Stack, useToast } from '@chakra-ui/react';
+import { Button, Card, Checkbox, CheckboxGroup, Divider, Flex, FormControl, FormHelperText, FormLabel, Input, Stack, Text, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
+import StudentList from './StudentList';
 const REGEX_NAME = /^(\w+\s?){1,5}$/;
 const REGEX_LASTNAME = /^(\w+\s?){1,2}$/; 
 
@@ -9,7 +11,7 @@ export const FormRegistrationStudent = () => {
   const [nameValidation , setNameValidation]= useState(false);
 
   const [lastname, setLastname]= useState('');
-  const [lastnameValidation, setLastNameValidation]= useState(false);
+  const [lastnameValidation, setLastnameValidation]= useState(false);
 
   const [sex, setSex]=useState('');
   const [sexValidation, setSexValidation]= useState(false);
@@ -18,11 +20,13 @@ export const FormRegistrationStudent = () => {
   const [ageValidation, setAgeValidation]= useState(false);
   
   const [degree,setDegree] =useState([]);
-  const [selectedDegree,setSelectedDegrees]=useState('');
+  const [selectedDegree,setselectedDegree]=useState('');
   
   const toast =useToast();
   const [isLoading, setIsLoading] = useState(false);
 
+  const[newStudentRegistrations, setNewStudentRegistration] = useState([]);
+  
   const handleNameInput =({target})=>{
     setName(target.value);
     
@@ -50,8 +54,9 @@ export const FormRegistrationStudent = () => {
   },[name]);
     
   useEffect(()=>{
-    setLastNameValidation(REGEX_LASTNAME.test(lastname));
+    setLastnameValidation(REGEX_LASTNAME.test(lastname));
   },[lastname]);
+
   useEffect(()=>{
     setSexValidation(sex !== '');
   },[sex]);
@@ -82,9 +87,33 @@ export const FormRegistrationStudent = () => {
     fetchDegree();
   },[setDegree, toast]);
 
+  //   muestro todos los registrados
+  useEffect(()=>{
+    const fetchNewStudentsRegistrations = async()=>{
+      try {
+        const response = await axios.get('/api/studentsRegistrations');
+        setNewStudentRegistration(response.data);
+        // console.log('registros: ',response.data);
+            
+      } catch (error) {
+        toast({
+          title: 'Error al obtener los registros',
+          description: 'Intente nuevamente',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+  
+        });   
+      }
+    };
+    fetchNewStudentsRegistrations();
+  },[newStudentRegistrations, toast]);
+  
+
+
   //   seleccionar el grado
   const handleSelectDegree=(selectedDegree)=>{  
-    setSelectedDegrees(selectedDegree);
+    setselectedDegree(selectedDegree);
     console.log('agregando!!',selectedDegree);
    
   };
@@ -103,35 +132,37 @@ export const FormRegistrationStudent = () => {
         lastname, 
         age, 
         sex, 
-        degree: selectedDegree
+        selectedDegree
       });
+      
       toast({
         title: 'Alumno agregado correctamente',
-        description: data,
+        description: data.name,
         status:'success',
         duration: 3000,
         isClosable: true,
       });
-      //   limpiar input
-      setName('');
-      setLastname('');
-      //   setSelectedDegrees([]);
-      setSex('');
-      setAge('');
+      
+
+
+      setNewStudentRegistration([...newStudentRegistrations,data]);
+      setNewStudentRegistration('');  
 
     } catch (error) {
       toast({
         title: 'Error al agregar al alumno',
-        description: 'Intente nuevamente',
+        description: error.response.data.error,
         status: 'error',
+
         duration: 3000,
         isClosable: true,
       });
     }
-    // limpiar input
+    
+    //   limpiar input
     setName('');
     setLastname('');
-    setSelectedDegrees('');
+    //   setSelectedDegrees([]);
     setSex('');
     setAge('');
 
@@ -139,8 +170,8 @@ export const FormRegistrationStudent = () => {
 
 
   return (
-    <>
-        
+    
+    <SidebarWithHeader> 
       <Card mb={8}>
         
         <FormControl>
@@ -263,7 +294,37 @@ export const FormRegistrationStudent = () => {
             
         }
       >Agregar al alumno</Button>
-    </>
+
+      <Flex flexDir="column" mt={8}>
+        <Flex justifyContent='center'> 
+          <Text> Registados </Text>
+        </Flex>
+        
+        {newStudentRegistrations.map((studentsRegistrations)=>(
+          <StudentList
+            key={studentsRegistrations.id}
+            studentsRegistrations={studentsRegistrations}
+            name={studentsRegistrations.name}
+            lastname={studentsRegistrations.lastname}
+            age={studentsRegistrations.age}
+            sex={studentsRegistrations.sex}
+            selectedDegree={studentsRegistrations.selectedDegree}
+
+          />
+        ) 
+        )}
+
+
+        
+
+        
+      </Flex>
+
+   
+
+
+    </SidebarWithHeader>
+    
   );
 };
 

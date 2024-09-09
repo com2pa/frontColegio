@@ -38,8 +38,7 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
         setDegree(response.data);
         // console.log('grados: ',response.data);        
       } catch (error) {
-        console.log(error);
-        
+        console.log(error);        
       }
     };
     fetchDegree();

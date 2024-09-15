@@ -32,7 +32,6 @@ import {
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
 import { IoMdPersonAdd } from 'react-icons/io';
-import { MdMedicalServices } from 'react-icons/md';
 import { LuBookMinus, LuSchool } from 'react-icons/lu';
 import { GiSpellBook, GiTeacher } from 'react-icons/gi';
 import { PiStudentFill } from 'react-icons/pi';
@@ -46,7 +45,7 @@ const LinkItems = [
   { name: 'Maestro', icon: GiTeacher, },
   { name: 'Inscripcion',icon: IoMdPersonAdd  , to:'/StudentRegistration' },
   { name: 'Asignaciones',icon:GiSpellBook },
-  { name: 'alumnos',icon:PiStudentFill},
+  { name: 'alumnos',icon:PiStudentFill,to:'/seeStudents'},
   { name: 'Expediente'},
   { name: 'Notas',icon:FcFinePrint },
 ];

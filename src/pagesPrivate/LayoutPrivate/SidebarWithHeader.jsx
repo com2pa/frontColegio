@@ -44,7 +44,8 @@ const LinkItems = [
   { name: 'Asignaturas', icon: LuBookMinus, to:'/asignaturas' },
   { name: 'Maestro', icon: GiTeacher, },
   { name: 'Inscripcion',icon: IoMdPersonAdd  , to:'/StudentRegistration' },
-  { name: 'Asignaciones',icon:GiSpellBook },
+  // asignaciones(forma de cronograma de actividades)
+  { name: 'Asignaciones',icon:GiSpellBook ,to:'/assignments'},
   { name: 'alumnos',icon:PiStudentFill,to:'/seeStudents'},
   { name: 'Expediente'},
   { name: 'Notas',icon:FcFinePrint },

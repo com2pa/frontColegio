@@ -265,10 +265,6 @@ export const FormRegistrationStudent = () => {
                       <Checkbox 
                         key={degree.id} 
                         value={degree.id}
-                        // onChange={handleSelectDegree}
-                        // onChange={(e) => handleDegreeInput(degree.id, e.target.checked)}
-                        // onChange={(e)=>setSelectedDegrees(e.target)}
-
                       >
                         {degree.degree}
                       </Checkbox>

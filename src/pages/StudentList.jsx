@@ -1,3 +1,5 @@
+// muetro el listado de los alumnos inscritos:
+// nombre , apellido, edad , sexo
 import { Button, Card,  Flex, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
 

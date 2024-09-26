@@ -12,7 +12,7 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
   const [degree,setDegree] =useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedDegree,setSelectedDegrees]=useState([]);
-  const toast=useToast()
+  const toast=useToast();
 
   const handleEdit=()=>{
     if(!isInputActive){
@@ -61,7 +61,7 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
         status:'success',
         duration: 3000,
         isClosable: true,
-      })
+      });
 
       
     } catch (error) {

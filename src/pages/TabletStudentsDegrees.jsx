@@ -1,11 +1,26 @@
 // tabla  de estudiante por grado
 import { Card,    Table, TableContainer, Tbody, Td,  Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export const TabletStudentsDegrees = ({degree}) => {
-
-
   //   console.log('desde tablet',degree);
+  const [assignments, setAssignments] = useState([]);
+
+  // obteniendo todas las asignaciones
+  useEffect(() => {
+    const FetchAssignments = async (degreeId) => {
+      try {
+        const response = await axios.get(`/api/assignment?degreeId=${degreeId}`);
+        setAssignments(response.data);
+        // console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    FetchAssignments(degree.id);
+  }, [degree.id, setAssignments]);
 
   
 
@@ -27,6 +42,21 @@ export const TabletStudentsDegrees = ({degree}) => {
               <Tr>
                 <Th>N°</Th>
                 <Th>Nombre y Apellido del estudiante </Th>
+                {/* {degree.assignments && degree.assignments.length > 0 ? (
+                  assignments.map((assignment, index) => (
+                    <>
+                      <Th key={index}>{assignment.lapso} {assignment.name}</Th>
+                    </>
+                  ))
+                ) : null} */}
+                {/* {assignments.length > 0 ? (
+                  assignments.map((assignment,) => (
+                    <>
+                      <Th >{assignment.lapso} {assignment.name}</Th>
+                    </>
+                  ))
+                ) : null} */}
+                            
               </Tr>
             </Thead>
             {/* mostrando los alumnos por grado  */}
@@ -34,10 +64,12 @@ export const TabletStudentsDegrees = ({degree}) => {
               {degree.students.map((student, index) => (
                 <Tr key={student.id}>
                   <Td>{index + 1}</Td>
-                  <Td>{student.name}{student.lastname}</Td>
+                  <Td>{student.name}{student.lastname}</Td>              
+                 
                 </Tr>
               ))
-              }       
+              }              
+                     
             </Tbody>
             <Tfoot>
               <Tr>                

@@ -1,11 +1,13 @@
 // tabla  de estudiante por grado
-import { Card,    Table, TableContainer, Tbody, Td,  Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import { Card,    Table, TableContainer, Tbody, Td,  Tfoot, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export const TabletStudentsDegrees = ({degree}) => {
   //   console.log('desde tablet',degree);
   const [assignments, setAssignments] = useState([]);
+  const [selectedDegree, setSelectedDegree] = useState(null);
+  const toast = useToast();
 
   // obteniendo todas las asignaciones
   useEffect(() => {
@@ -22,7 +24,18 @@ export const TabletStudentsDegrees = ({degree}) => {
     FetchAssignments(degree.id);
   }, [degree.id, setAssignments]);
 
-  
+  //   seleccionar el grado
+  const handleSelectDegree=(degree)=>{
+    setSelectedDegree(degree);
+    // console.log('grado seleccionado !',degree.degree, degree.students);
+    toast({
+      title: `Estudiantes del ${degree.degree}° grado`,
+      description: 'cargado grados',
+      status: 'info',
+      duration: 1000,
+      isClosable: true,
+    });
+  };
 
   return (
     <>

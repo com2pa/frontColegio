@@ -42,13 +42,13 @@ const LinkItems = [
   { name: 'Home', icon: FiHome,to:'/dashboard' },
   { name: 'Grado', icon: LuSchool   ,to:'/grado' },
   { name: 'Asignaturas', icon: LuBookMinus, to:'/asignaturas' },
-  { name: 'Maestro', icon: GiTeacher, },
+  { name: 'Maestro', icon: GiTeacher, to:'/teacher'},
   { name: 'Inscripcion',icon: IoMdPersonAdd  , to:'/StudentRegistration' },
   // asignaciones(forma de cronograma de actividades)
   { name: 'Asignaciones',icon:GiSpellBook ,to:'/assignments'},
   { name: 'alumnos',icon:PiStudentFill,to:'/seeStudents'},
   { name: 'Expediente'},
-  { name: 'Notas',icon:FcFinePrint },
+  { name: 'Notas',icon:FcFinePrint ,to:'/note'},
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {

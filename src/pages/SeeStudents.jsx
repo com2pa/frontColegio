@@ -22,7 +22,7 @@ export const SeeStudents = () => {
     const fetchDegree =async()=>{
       const {data} = await axios.get('/api/degrees');
       setDegree(data);
-      
+      console.log(data);
     };
     fetchDegree();  
   },[setDegree]);

@@ -6,6 +6,8 @@ import Subjects from '../pages/Subjects';
 import FormRegistrationStudent from '../pages/FormRegistrationStudent';
 import SeeStudents from '../pages/SeeStudents';
 import Assignments from '../pages/Assignments';
+import Teacher from '../pages/Teacher';
+import Note from '../pages/Note';
 
 
 export const Root = () => {
@@ -24,6 +26,10 @@ export const Root = () => {
           <Route path='/seeStudents' element={<SeeStudents />} /> 
           {/*cronograma de actividad  */}
           <Route path='/assignments' element={<Assignments/>}/>
+          {/* lista de maestros */}
+          <Route path='/teacher' element={<Teacher/>}/> 
+          {/* LISTA DE NOTA DE ESTUDIANTES */}
+          <Route path='/note' element={<Note/>}/>
           
         
         </Route>

@@ -1,12 +1,15 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import { Button, ButtonGroup, Card, Checkbox, CheckboxGroup, Flex, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, useDisclosure, useToast,  } from '@chakra-ui/react';
+import { Button, ButtonGroup, Card, Checkbox, CheckboxGroup, Flex, 
+  IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, 
+  ModalFooter, ModalHeader, ModalOverlay,  Stack, useDisclosure, useToast,  
+} from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ImPencil2 } from 'react-icons/im';
 
 
-export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
-  
+export const ListSubjects = ({id,subject,handleDelete,handleEditSubject}) => {
+  // console.log(subject.id);
   const [name , setName]=useState(subject.name);
   const [isInputActive, setIsInputActive]=useState(false);
   const [degree,setDegree] =useState([]);
@@ -79,7 +82,14 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
 
   return (
     <>    
-      <Card key={subject.id}>
+      <Card 
+        key={id}
+        p={5}
+        borderWidth="1px"
+        borderRadius="lg"
+        mb={5}
+        justifyContent="space-between"
+      >
         <Flex>
           <Input
             type='text'
@@ -100,7 +110,7 @@ export const ListSubjects = ({subject,handleDelete,handleEditSubject}) => {
                 color="white" 
                 bg="red.600" 
                 icon={<DeleteIcon/> }
-                onClick={handleDelete}
+                onClick={() => handleDelete(subject.id)}
               />
               <Button
                 color="white" 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
-import { Button, Card, Flex, FormControl, Heading,  Input, Select, useToast,} from '@chakra-ui/react';
+import { Button, Card, Flex, FormControl, Heading,  Input, useToast,} from '@chakra-ui/react';
 import axios from 'axios';
 
 import ListSubjects from './ListSubjects';
@@ -11,6 +11,7 @@ export const Subjects = () => {
   const [name, setName]=useState('');
   const [newSubject, setNewSubject]=useState([]);
   const [nameValidation, setNameValidation]=useState(false);
+ 
   // const [selectedDegrees, setSelectedDegrees] = useState('');
   // const [degree, setDegree]=useState([]);
   const toast =useToast();
@@ -123,19 +124,23 @@ export const Subjects = () => {
   };
 
   // eliminar asignatura
-  const handleDelete=async(id)=>{
+  const handleDelete=async(subject)=>{
+    const elimi=subject.id;
+    console.log(elimi);
     try {
-      const{data}=await axios.delete(`/api/subjects/${id}`);
-      const updatedSubject= newSubject.filter((s)=>s._id !== id);
-      // console.log(updatedSubject);
+      const{data}=await axios.delete(`/api/subjects/${elimi}`);
+
+      // console.log('asignatura enviada!...',data);
+      const updatedSubject= newSubject.filter((s)=>s.id !== elimi);
       setNewSubject(updatedSubject);
+      console.log('asignatura enviada!...',updatedSubject);
       toast({
         title: 'Asignatura eliminada correctamente',
         description:data,
         status:'success',
         duration: 3000,
         isClosable: true,
-      });
+      });      
     } catch (error) {
       console.log(error);
       toast({
@@ -222,7 +227,7 @@ export const Subjects = () => {
             id={subject._id}
             name={subject.name}
             handleDelete={handleDelete}
-            handleEditSubject={handleEditSubject}
+            handleEditSubject={()=>handleEditSubject(subject.id)}
             subject={subject}
           />
           

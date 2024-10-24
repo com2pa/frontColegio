@@ -6,14 +6,21 @@ import { useState } from 'react';
 // import React, { useState } from 'react';
 
 export const DegreeCard = ({degree,handleDeleteDegree}) => {
-  const [isInputActive, ]= useState(false);
-  const [degreee ,setDegree]= useState(degree.degree);
+  // const [isInputActive, ]= useState(false);
+  // const [degreee ,setDegree]= useState(degree.degree);
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
     
-      <Card key={degree.id} mt={5} p={7} >
-        <Flex justifyContent={{md:'space-evenly'}}  > 
+      <Card 
+        key={degree.id} 
+        // mt={5} 
+        p={7}
+       
+      >
+        <Flex 
+          justifyContent={{md:'space-evenly'}}
+        > 
           {/* <Input 
             type='number'
             value={degreee}

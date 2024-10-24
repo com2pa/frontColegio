@@ -125,18 +125,17 @@ export const Subjects = () => {
 
   // eliminar asignatura
   const handleDelete=async(subject)=>{
-    const elimi=subject.id;
-    console.log(elimi);
+    console.log('asignatura a eliminar',subject);
     try {
-      const{data}=await axios.delete(`/api/subjects/${elimi}`);
+      const{data}=await axios.delete(`/api/subjects/${subject}`);
 
-      // console.log('asignatura enviada!...',data);
-      const updatedSubject= newSubject.filter((s)=>s.id !== elimi);
+      const updatedSubject= newSubject.filter((s)=>s.id !== subject);
       setNewSubject(updatedSubject);
       console.log('asignatura enviada!...',updatedSubject);
+
       toast({
         title: 'Asignatura eliminada correctamente',
-        description:data,
+        description:data.name,
         status:'success',
         duration: 3000,
         isClosable: true,

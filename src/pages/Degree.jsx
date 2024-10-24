@@ -9,6 +9,8 @@ export const Degree = () => {
   const [degree, setDegree] = useState('');
   const [newDegree, setNewDegree] = useState([]);
   const toast =useToast();
+ 
+
   // const {auth}=useAuth();
 
 
@@ -19,18 +21,27 @@ export const Degree = () => {
   // // muestra todos los grados  
   useEffect(()=>{
     const getDegree = async()=>{
-      const {data}=await axios.get('/api/degrees');
-      setNewDegree(data);
+      try {
+        const {data}=await axios.get('/api/degrees');
+        setNewDegree(data);
+        
+      } catch (error) {
+        console.log(error);
+      }
     };        
     getDegree();
-  },[setNewDegree]);
+  },[]);
 
   
   // agregar nuevo grado
   const handleNewDegree =async()=>{
     try {
       const{data}=await axios.post(`/api/degrees`,{degree});
-      console.log(data);
+      // console.log(data);   
+      setNewDegree([...newDegree,data]);  // para actualizar la lista despues de agregar un nuevo grado
+      setDegree('');  
+      // console.log(updatedDegrees);    
+      
       toast({
         title: 'Grado agregado correctamente',
         description:data.degree,
@@ -38,9 +49,7 @@ export const Degree = () => {
         duration: 3000,
         isClosable: true,
       });
-      // setNewDegree(newDegree.concat(data));
-      setNewDegree([...newDegree,data]);  // para actualizar la lista despues de agregar un nuevo grado
-      setDegree('');
+    
     } catch (error) {
       console.log(error);
     }
@@ -51,8 +60,9 @@ export const Degree = () => {
     try {
       const {data}=await axios.delete(`/api/degrees/${degree.id}`);
       console.log(data);
-      const updatedDegrees = newDegree.filter((cat)=>cat.id !== degree.id);
+      const updatedDegrees = newDegree.filter((d)=>d.id !== degree.id);
       setNewDegree(updatedDegrees);
+      
 
       toast({
         title: 'Grado eliminado correctamente',
@@ -82,7 +92,7 @@ export const Degree = () => {
       </Flex>
       
       <Card minH={{md:'10vh'}} p={5}>        
-        {/* Agregar formulario para ingresar los grados */}
+        
         <Flex 
           flexDir={{base:'colum',md:'row'}} 
           gap={{base:5,md:5}}
@@ -112,7 +122,7 @@ export const Degree = () => {
         mt={{md:5}}
       >
         <Heading fontSize={{base:'1rem',md:'1.2rem'}} > GRADOS REGISTRADOS</Heading>
-        {newDegree.map((degree)=>(
+        {/* {newDegree.map((degree)=>(
           <>
             <Flex flexDir={'column'} paddingBottom={2} >
               <Card minH={{md:'10vh'}} width={'100%'}>
@@ -127,7 +137,29 @@ export const Degree = () => {
 
             </Flex>
           </>
-        ))}            
+        ))}             */}
+        {newDegree.length>0?
+          newDegree.map((degree)=>(
+            <>
+              <Card 
+                minH={{md:'10vh'}} 
+                width={'50%'}
+                key={degree.id}
+                mb={4}
+
+                
+              >
+                <List>
+                  <DegreeCard                    
+                    degree={degree}
+                    handleDeleteDegree={handleDeleteDegree}
+                  />
+                </List>
+              </Card>
+            </>
+          )):
+          <Heading fontSize={{base:'1rem',md:'1.2rem'}} >No hay grados registrados</Heading>
+        }
       </Flex>
     </SidebarWithHeader>
   );

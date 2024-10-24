@@ -4,7 +4,7 @@ import Home from '../pages/Home';
 import Verify from '../pages/verify';
 import PersistAuth from '../components/PersistAuth';
 import Registro from "../pages/Login/Registro";
-import Login from "../pages/Login/Login"
+import Login from "../pages/Login/Login";
 
 export const Root = () => {
   return (

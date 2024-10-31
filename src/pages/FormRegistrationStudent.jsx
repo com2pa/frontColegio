@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, CheckboxGroup, Divider, Flex, FormControl, FormHelperText, FormLabel, Input, Stack, Text, useToast } from '@chakra-ui/react';
+import { Button, Card, Checkbox, CheckboxGroup,  Flex, FormControl, FormHelperText, FormLabel, Input, Stack, Text, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';

@@ -1,11 +1,11 @@
-import { Button, ButtonGroup, Card,  Flex, Text } from '@chakra-ui/react';
+import { Button, ButtonGroup, Card,  Flex, List, Text } from '@chakra-ui/react';
 import React from 'react';
 
 export const CardAssignments = ({assignment,handleDelete}) => {
-//   console.log('Assignment.....', assignment);
+  // console.log('Assignment.....', assignment);
   return (
     <>      
-      <Card
+      {/* <Card
         maxW={"100%"}
         w={"100%"}
         borderRadius={8}
@@ -19,10 +19,7 @@ export const CardAssignments = ({assignment,handleDelete}) => {
      
         <Flex
           w={"100%"}
-          gap={4}
-        // flexDir="column"
-        // justifyContent="space-between"
-        // flexDirection={{ base: 'column', md: 'row' }}    
+          gap={4}       
         >
        
       
@@ -37,18 +34,7 @@ export const CardAssignments = ({assignment,handleDelete}) => {
           >
             <Text>Lapso: {assignment.lapso}</Text>
           </Flex>
-        </Flex>
-        {/* <Divider
-        borderColor="gray.200"
-        w={"100%"}
-        my={3}
-        borderStyle="solid"
-        borderTopWidth={1}
-        borderBottomWidth={1}
-        borderLeftWidth={0}
-        borderRightWidth={0}
-        flexBasis="auto"
-      /> */}
+        </Flex>     
         <Flex
           w={"100%"}
           gap={8}
@@ -91,20 +77,7 @@ export const CardAssignments = ({assignment,handleDelete}) => {
           justifyContent="center"
           flexDirection={{ base: 'column', md: 'row' }}
 
-        >
-       
-      
-          {/* <Flex
-            w={"50%"}
-          >
-        
-            <Text>Tema: {assignment.name}</Text>        
-          </Flex>
-          <Flex
-            w={"50%"}
-          >
-            <Text>Actidad: {assignment.tipo}</Text>
-          </Flex> */}
+        >       
           <ButtonGroup>
             <Button 
               onClick={() => handleDelete(assignment.id)}
@@ -114,6 +87,32 @@ export const CardAssignments = ({assignment,handleDelete}) => {
             >Borrar</Button>          
           </ButtonGroup>
         </Flex>
+      </Card> */}
+      <Card
+        maxW={"100%"}
+        w={"100%"}
+        borderRadius={8}
+        boxShadow="lg"
+        mt={4}
+        
+        
+      >
+        <List>
+          <li key={assignment._id}>
+            <p>Tema:{assignment.name}</p>
+            <p>Tipo: {assignment.tipo}</p>
+            <p>Lapso: {assignment.lapso}</p>
+            <p>Grado: {assignment.degree.degree}</p>
+            <p>Asignatura: {assignment.subjects.name}</p>
+          </li>
+        </List>
+        <Button 
+          onClick={() => handleDelete(assignment._id)}
+          colorScheme="red"
+          size="sm"
+          isDisabled={assignment.isAssigned}
+
+        >Borrar</Button>
       </Card>
     </>
   );

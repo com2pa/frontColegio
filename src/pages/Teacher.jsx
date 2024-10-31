@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
 import axios from 'axios';
-import { Card, useToast } from '@chakra-ui/react';
+import { Card, Heading, useToast } from '@chakra-ui/react';
 
 export const Teacher = () => {
   // llamando a los usuarios con role de maestro
@@ -15,7 +15,7 @@ export const Teacher = () => {
         // filtra los los usuario con rol maestro
         const filteredTeachers = data.filter(user => user.role === 'maestro');
         SetTeacher(filteredTeachers);
-        //   console.log(filteredTeachers);
+        console.log(filteredTeachers);
         //   SetTeacher(data);      
         //   console.log(data);
         
@@ -41,7 +41,7 @@ export const Teacher = () => {
   // renderizando los maestros registrados
   return (
     <SidebarWithHeader>
-      <h1>Maestros</h1>
+      <Heading>Maestros</Heading>
       
             
      

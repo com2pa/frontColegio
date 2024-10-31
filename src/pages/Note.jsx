@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
 import axios from 'axios';
-import { Box, Button, Card, Flex, Grid, GridItem, Heading, Input, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, Card, Flex, Grid, GridItem, Heading,  Text, useToast } from '@chakra-ui/react';
 import { FaRegEye } from 'react-icons/fa';
 import ListNote from './ListNote';
 
@@ -13,7 +13,7 @@ export const Note = () => {
     const fetchDegree =async()=>{
       const {data} = await axios.get('/api/degrees');
       setDegree(data);
-      console.log(data);
+      // console.log(data);
     };
     fetchDegree();  
   },[setDegree]);  
@@ -128,16 +128,11 @@ export const Note = () => {
                 justifyContent={'center'}
               > Notas de Estudiantes del  {selectedDegree.degree}° grado</Text>
             </Box>
-            
-            {/* <TabletStudentsDegrees
-            //   key={selectedDegree.id}             
-              degree={selectedDegree}
-              degreeId={selectedDegree.id}
-            />        */}
-            <ListNote/>
+            <ListNote
+              selectedDegree={selectedDegree}      
+                         
+            />
           
-            
-           
           </Card>
 
         )}

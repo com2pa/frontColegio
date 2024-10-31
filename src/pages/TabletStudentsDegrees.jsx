@@ -1,13 +1,25 @@
 // tabla  de estudiante por grado
-import { Card,    Table, TableContainer, Tbody, Td,  Tfoot, Th, Thead, Tr, useToast } from '@chakra-ui/react';
+import { Card,    
+  Table, 
+  TableContainer, 
+  Tbody, 
+  Td,  
+  Tfoot, 
+  Th, 
+  Thead, 
+  Tr, 
+  // useToast 
+} from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export const TabletStudentsDegrees = ({degree}) => {
   //   console.log('desde tablet',degree);
-  const [assignments, setAssignments] = useState([]);
-  const [selectedDegree, setSelectedDegree] = useState(null);
-  const toast = useToast();
+  const [
+    // assignments, 
+    setAssignments] = useState([]);
+  // const [selectedDegree, setSelectedDegree] = useState(null);
+  // const toast = useToast();
 
   // obteniendo todas las asignaciones
   useEffect(() => {
@@ -25,17 +37,17 @@ export const TabletStudentsDegrees = ({degree}) => {
   }, [degree.id, setAssignments]);
 
   //   seleccionar el grado
-  const handleSelectDegree=(degree)=>{
-    setSelectedDegree(degree);
-    // console.log('grado seleccionado !',degree.degree, degree.students);
-    toast({
-      title: `Estudiantes del ${degree.degree}° grado`,
-      description: 'cargado grados',
-      status: 'info',
-      duration: 1000,
-      isClosable: true,
-    });
-  };
+  // const handleSelectDegree=(degree)=>{
+  //   setSelectedDegree(degree);
+  //   // console.log('grado seleccionado !',degree.degree, degree.students);
+  //   toast({
+  //     title: `Estudiantes del ${degree.degree}° grado`,
+  //     description: 'cargado grados',
+  //     status: 'info',
+  //     duration: 1000,
+  //     isClosable: true,
+  //   });
+  // };
 
   return (
     <>
@@ -77,7 +89,7 @@ export const TabletStudentsDegrees = ({degree}) => {
               {degree.students.map((student, index) => (
                 <Tr key={student.id}>
                   <Td>{index + 1}</Td>
-                  <Td>{student.name}{student.lastname}</Td>              
+                  <Td>{student.name} {student.lastname}</Td>              
                  
                 </Tr>
               ))

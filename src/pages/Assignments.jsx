@@ -307,7 +307,11 @@ export const Assignments = () => {
         </Button>
       </Card>
       <Flex>
-        <Box w='100%' p={8}>
+        <Box 
+          w='100%' 
+          p={8}
+          
+        >
           <Heading>Asignaciones</Heading>
           
           {assignment.map((assignment) => (
@@ -319,8 +323,7 @@ export const Assignments = () => {
             <CardAssignments
               key={assignment.id}
               assignment={assignment}
-              handleDelete={handleDelete}
-                
+              handleDelete={handleDelete}            
 
             />
           ))}

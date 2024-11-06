@@ -26,6 +26,7 @@ export const FormRegistrationStudent = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const[newStudentRegistrations, setNewStudentRegistration] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
   
   const handleNameInput =({target})=>{
     setName(target.value);
@@ -70,8 +71,7 @@ export const FormRegistrationStudent = () => {
     const fetchDegree = async()=>{
       try {
         const response = await axios.get('/api/degrees');
-        setDegree(response.data);
-        // console.log('grados: ',response.data);
+        setDegree(response.data);      
             
       } catch (error) {
         toast({
@@ -94,7 +94,7 @@ export const FormRegistrationStudent = () => {
         const response = await axios.get('/api/studentsRegistrations');
         setNewStudentRegistration(response.data);
         // console.log('registros: ',response.data);
-            
+        setFilteredStudents(response.data);            
       } catch (error) {
         toast({
           title: 'Error al obtener los registros',
@@ -107,7 +107,7 @@ export const FormRegistrationStudent = () => {
       }
     };
     fetchNewStudentsRegistrations();
-  },[newStudentRegistrations, toast]);
+  },[setNewStudentRegistration,setFilteredStudents, toast]);
   
 
 
@@ -117,11 +117,6 @@ export const FormRegistrationStudent = () => {
     console.log('agregando!!',selectedDegree);
    
   };
-
-  //   const handleDegreeInput = (degreeId, isChecked) => {
-  //     setSelectedDegrees(isChecked ? [...selectedDegree, degreeId] : selectedDegree.filter(d => d !== degreeId));
-  //     console.log(degreeId, isChecked);
-  //   };
 
   // agregar alumno
   const handleAddStudent = async()=>{
@@ -142,11 +137,17 @@ export const FormRegistrationStudent = () => {
         duration: 3000,
         isClosable: true,
       });
-      
-
-
       setNewStudentRegistration([...newStudentRegistrations,data]);
-      setNewStudentRegistration('');  
+      setFilteredStudents([...filteredStudents, data]); 
+      
+          
+      //   limpiar input
+      setName('');
+      setLastname('');      
+      setSex('');
+      setAge('');
+
+
 
     } catch (error) {
       toast({
@@ -158,14 +159,6 @@ export const FormRegistrationStudent = () => {
         isClosable: true,
       });
     }
-    
-    //   limpiar input
-    setName('');
-    setLastname('');
-    //   setSelectedDegrees([]);
-    setSex('');
-    setAge('');
-
   };
 
 
@@ -243,7 +236,11 @@ export const FormRegistrationStudent = () => {
               </Flex>
             </FormControl>
           </Flex>
-          <Flex flexDir={{base:'column',md:'row'}} p={{base:15}} gap={{base:4}}>
+          <Flex 
+            flexDir={{base:'column',md:'row'}} 
+            p={{base:15}} 
+            // gap={{base:4,md:0,lg:0}}
+          >
             <FormControl>
               <Flex flexDir={'column'}>
                 <FormLabel 
@@ -251,7 +248,7 @@ export const FormRegistrationStudent = () => {
                   w="100%"
                   display={'flex'}
                   justifyContent={'center'}
-                >Grado del Primer niño/a</FormLabel>
+                >Grado a inscribir</FormLabel>
                 {/* <Input placeholder="ingrese el grado" /> */}
                 <CheckboxGroup
                   defaultValue={degree.id}
@@ -260,13 +257,18 @@ export const FormRegistrationStudent = () => {
                   onChange={handleSelectDegree}
 
                 >
-                  <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                  <Stack 
+                    // spacing={[1, 5]} 
+                    direction={['column', 'row']}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                  >
                     {degree.map((degree) => (
                       <Checkbox 
                         key={degree.id} 
-                        value={degree.id}
+                        value={degree.id}                        
                       >
-                        {degree.degree}
+                        {degree.degree} ° grado
                       </Checkbox>
                     ))}
                   </Stack>
@@ -291,12 +293,24 @@ export const FormRegistrationStudent = () => {
         }
       >Agregar al alumno</Button>
 
-      <Flex flexDir="column" mt={8}>
+      <Flex 
+        flexDir="column" 
+        mt={8}
+        gap={8}
+        w="100%"      
+        justifyContent="center"
+        alignItems="center"
+        bgColor='gray.100'
+        // height="60vh"
+        overflowY="auto"
+        
+        
+      >
         <Flex justifyContent='center'> 
           <Text> Registados </Text>
         </Flex>
         
-        {newStudentRegistrations.map((studentsRegistrations)=>(
+        {filteredStudents.map((studentsRegistrations) => (
           <StudentList
             key={studentsRegistrations.id}
             studentsRegistrations={studentsRegistrations}
@@ -309,11 +323,7 @@ export const FormRegistrationStudent = () => {
           />
         ) 
         )}
-
-
-        
-
-        
+       
       </Flex>
 
    

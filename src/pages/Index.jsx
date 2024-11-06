@@ -1,10 +1,15 @@
 import React from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
+import PieChart from '../components/PieChart';
+
 
 export const Index = () => {
   return (
-    <SidebarWithHeader>
-      <h1>Aquí se verá tu página de inicio</h1>
+    <SidebarWithHeader>     
+      <>
+        <PieChart/>
+      </>
+
     </SidebarWithHeader>
   );
 };

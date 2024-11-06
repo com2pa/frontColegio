@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card,  Flex, List, Text } from '@chakra-ui/react';
+import { Button,Card,List,} from '@chakra-ui/react';
 import React from 'react';
 
 export const CardAssignments = ({assignment,handleDelete}) => {
@@ -89,16 +89,19 @@ export const CardAssignments = ({assignment,handleDelete}) => {
         </Flex>
       </Card> */}
       <Card
-        maxW={"100%"}
+        // maxW={"100%"}
         w={"100%"}
         borderRadius={8}
         boxShadow="lg"
         mt={4}
-        
+        p={4}
+        bgGradient={'linear(to-l, #6066FA, yellow)'}
         
       >
         <List>
-          <li key={assignment._id}>
+          <li 
+            key={assignment._id}
+          >
             <p>Tema:{assignment.name}</p>
             <p>Tipo: {assignment.tipo}</p>
             <p>Lapso: {assignment.lapso}</p>
@@ -111,7 +114,7 @@ export const CardAssignments = ({assignment,handleDelete}) => {
           colorScheme="red"
           size="sm"
           isDisabled={assignment.isAssigned}
-
+          
         >Borrar</Button>
       </Card>
     </>

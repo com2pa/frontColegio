@@ -3,7 +3,7 @@
 // lapso, grado, materia, nombre de la actividad , que tipo de actividad 
 import React, { useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
-import { Box, Button, Card, Checkbox, CheckboxGroup, Flex, FormControl, FormHelperText, FormLabel, Heading, Img, Input, Select, Stack, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, Card, Checkbox, CheckboxGroup, Flex, FormControl, FormHelperText, FormLabel, Heading, Img, Input, List, Select, Stack, Text, useToast } from '@chakra-ui/react';
 import dos from '../assets/2.png';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -146,31 +146,16 @@ export const Assignments = () => {
       >
         <Heading> Cronograma de actidades</Heading>
       </Flex>
-      <Card 
-     
-      >
-        <Box 
-          h='20vh'
-          w='100%'
-          display={{ base: 'flex', md: 'flex' }}
-          bg={'red'}
-        >
-          <Img 
-            src={dos}
-            alt='banner'
-          />
-        </Box>        
+      <Card      
+      >              
         <FormControl>
           <Flex
             w="100%"
             p={8}
             gap={8}
           >
-
-        
             <Flex
-              w="50%"
-         
+              // w="50%"         
             >
               <FormControl>
                 <FormLabel>Lapso</FormLabel>
@@ -194,17 +179,20 @@ export const Assignments = () => {
             >
               <FormControl>
                 <FormLabel>Grado</FormLabel>
+                
                 <CheckboxGroup
                   defaultValue={degree.id}                  
                   colorScheme='green'
                   onChange={ handleDegreeChange}
                 >
-                  <Stack spacing={5} direction='row'>
+                  <Stack 
+                    spacing={1}  
+                    direction={['column', 'row']}
+                  >
                     {degree.map((degree) => (
                       <Checkbox 
                         key={degree.id} 
-                        value={degree.id}
-                        
+                        value={degree.id}                        
                         size='sm' 
                         colorScheme='red'
                         defaultChecked                      
@@ -308,24 +296,29 @@ export const Assignments = () => {
       </Card>
       <Flex>
         <Box 
-          w='100%' 
-          p={8}
-          
+          w='100%'
         >
-          <Heading>Asignaciones</Heading>
+          <Heading
+            as='h2'
+            fontWeight='bold'
+            fontSize='2xl'
+            textAlign='center'
+            mt={5}
+          >Asignaciones</Heading>
           
           {assignment.map((assignment) => (
-            // <Card key={assignment.id}>
-            //   <Text>
-            //     Grado: {assignment.degree} - Lapso: {assignment.lapso} - Asignatura: {assignment.subject} - Tema: {assignment.name} - Actidad: {assignment.tipo}
-            //   </Text>
-            // </Card>
-            <CardAssignments
-              key={assignment.id}
-              assignment={assignment}
-              handleDelete={handleDelete}            
+           
+            <List
+              key={assignment.id}  
+            >                        
+              <CardAssignments
+                
+                assignment={assignment}
+                handleDelete={handleDelete}            
 
-            />
+              />
+            </List>
+            
           ))}
           
         </Box>

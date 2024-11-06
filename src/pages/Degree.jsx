@@ -91,23 +91,33 @@ export const Degree = () => {
         <Heading fontSize={{base:'1rem',md:'1.2rem'}} > INGRESE LOS GRADOS DE LA ESCUELA</Heading>
       </Flex>
       
-      <Card minH={{md:'10vh'}} p={5}>        
+      <Card 
+        // minH={{md:'10vh'}} 
+        p={5}>        
         
         <Flex 
-          flexDir={{base:'colum',md:'row'}} 
+          // flexDir={{md:'column'}} 
           gap={{base:5,md:5}}
-          justifyContent={{md:'space-between'}} 
+          justifyContent={{md:'center',lg:'center'}}           
           onSubmit={handleNewDegree}
+          width="100%"
         >
           <Input 
             type="number"
             value={degree}
             onChange={handleNumberDegree}
+            placeholder='Grado'         
+            bg={'gray.100'}
+            
           />
           <Button 
-            colorScheme='teal' 
-            variant='ghost'
+            size='md' 
+            colorScheme="yellow"
+            color={'white'}
+            type='submit'
             onClick={handleNewDegree}
+            w={'100%'}
+
           >
             Agregar Grado
           </Button>
@@ -143,11 +153,9 @@ export const Degree = () => {
             <>
               <Card 
                 minH={{md:'10vh'}} 
-                width={'50%'}
+                width='100%'
                 key={degree.id}
                 mb={4}
-
-                
               >
                 <List>
                   <DegreeCard                    

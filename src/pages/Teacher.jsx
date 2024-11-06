@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
 import axios from 'axios';
-import { Card, Heading, useToast } from '@chakra-ui/react';
+import { Card, Heading, Stack, Switch, Table, Td, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 
 export const Teacher = () => {
   // llamando a los usuarios con role de maestro
@@ -41,23 +41,68 @@ export const Teacher = () => {
   // renderizando los maestros registrados
   return (
     <SidebarWithHeader>
-      <Heading>Maestros</Heading>
-      
-            
-     
-      {teacher && teacher.map((teacher)=>(
-        
-        <Card 
-          key={teacher._id}
-          bg='yellow.100'
-          w='100%'
-          h='100px'
-          my={4}
-        > {teacher.name}
-        </Card>
-        
-      )
-      )}
+      <Heading      
+        as="h1"
+        fontSize="xl"
+        fontWeight="bold"
+        color="black"       
+        textAlign="center"
+        p={'0'}   
+      >Maestros</Heading>
+
+      <>
+        <Table 
+          variant="simple"
+          size="sm"
+          width="100%"
+          // borderCollapse="collapse"
+          boxShadow="lg"
+          bg="white"
+          p={'0'}
+          m={'0'}
+          border="1px solid"
+          borderColor="gray.200"
+          borderRadius="lg"          
+          overflowY='auto'
+
+        >
+          <Thead
+            bgGradient={'linear(to-l, #6066FA, yellow)'}                               
+          >
+            <Tr>
+              <Th>N°</Th>
+              <Th>Personal Administrativo</Th>
+              <Th>Acceso</Th>              
+            </Tr>
+          </Thead>
+          <tbody>
+            {teacher && teacher.map((teacher,index)=>(
+              <Tr key={index}>
+                <Td>{index+1}</Td>
+                <Td>{teacher.name}</Td>
+                <Td>
+                  <Stack direction='row'>
+                    <Switch colorScheme='red' />                    
+                  </Stack>
+                </Td>
+              </Tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <Tr>
+              <Th 
+                colSpan="3"
+                fontWeight='bold'
+                fontSize='lg'
+                textAlign='center'
+                color='black.600'
+                
+              >Total Maestros: {teacher && teacher.length}</Th>
+            </Tr>
+          </tfoot>
+        </Table>
+      </>
+    
       
     </SidebarWithHeader>
   );

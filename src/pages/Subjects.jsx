@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
-import { Button, Card, Flex, FormControl, Heading,  Input, useToast,} from '@chakra-ui/react';
+import { Box, Button, Card, Flex, FormControl, Heading,  Input, List, useToast,} from '@chakra-ui/react';
 import axios from 'axios';
 
 import ListSubjects from './ListSubjects';
@@ -157,54 +157,43 @@ export const Subjects = () => {
       <Flex justifyContent={{base:'center',md:'center'}} my={{base:'1rem',md:'1rem'}}>
         <Heading> Asignaturas</Heading>
       </Flex>
-      <Card minH={{md:'10vh'}} p={5}>        
+      <Card 
+        minH={{md:'10vh'}} p={5} my={8}>        
         {/* Agregar formulario para ingresar los grados */}
         <FormControl isInvalid={!nameValidation && name}> 
-          <Flex w="100%"> 
-                 
-            <Flex 
-              flexDir={{base:'colum',md:'row'}} 
-              gap={{base:5,md:5}}
-              justifyContent={{md:'space-between'}} 
-              flexDirection={{base:'column', md:'column'}}
+          <Flex 
+            w="100%"
+            gap={{base:15}}
+            flexDir={{base:'column',sm:'column',md:'row'}}
+          >      
+            <Flex  
               onSubmit={ handleNewSubject}
-              width="50%"
+              width="100%"
             >
               <Input 
                 type="text"
                 value={name}
                 onChange={handleNameSubjects}
                 placeholder='ingrese el nombre de la asignatura'
+                w={'100%'}
+                borderWidth={nameValidation? '2px' : '1px'}
+                bg={'gray.100'}
               />
-              {/*<Select
-                value={selectedDegrees}
-                onChange={handleSelectDegree}
-                name="degree" 
-              >
-                
-                {degree.map((degree)=>(
-                  
-                  <option
-                    key={degree._id} 
-                    value={degree._id}                    
-                  >
-                    {degree.degree}
-                  </option>
-                 
-                ))}  
-              </Select>*/}
-
             </Flex>
             <Flex
-              width="50%"
+              width="100%"
               justifyContent={{md:'space-around'}}
               alignItems={{md:'center'}}
             >
-              <Button 
-                colorScheme='teal' 
-                variant='ghost'
+              <Button  
+                size='md' 
+                colorScheme="yellow"
+                color={'white'}
+                type='submit'
+                w={'100%'}
                 onClick={handleNewSubject}
                 isDisabled={!nameValidation }
+
               >
                Agregar Asignaturas
               </Button>
@@ -214,22 +203,31 @@ export const Subjects = () => {
       </Card>
       {/* Listado de Asignaturas */}
       <Flex 
-        justifyContent={{base:'center',md:'center'}} 
+        flexDir={'column'}
         textAlign={{base:'center',md:'center'}} 
-        mt={{md:'3rem'}}>
-        <Heading fontSize={{base:'1rem',md:'1.2rem'}} > LISTADO DE ASIGNATURAS</Heading>
+        mt={{md:'3rem'}}
+        w={'100%'}
+        my={4}
+      >
+        <Heading fontSize={{base:'1rem',md:'1.2rem'}} 
+        > LISTADO DE ASIGNATURAS</Heading>
       </Flex>
-      <Flex flexDir={{md:'column'}}>
+      <Flex flexDir={'column'}>
         {newSubject.map((subject)=>(
-          <ListSubjects
+          <Box 
             key={subject._id}
-            id={subject._id}
-            name={subject.name}
-            handleDelete={handleDelete}
-            handleEditSubject={()=>handleEditSubject(subject.id)}
-            subject={subject}
-          />
-          
+          >            
+            <List>
+              <ListSubjects
+                // key={subject._id}
+                id={subject._id}
+                name={subject.name}
+                handleDelete={handleDelete}
+                handleEditSubject={()=>handleEditSubject(subject.id)}
+                subject={subject}
+              />
+            </List>
+          </Box>
         )
         )}
       </Flex>

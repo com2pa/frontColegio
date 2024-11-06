@@ -374,6 +374,11 @@ export const ListNote = ({selectedDegree}) => {
                     </Tr>
                   ))}
                 </Tbody>
+                <Tfoot>
+                  <Tr>
+                    <Td colSpan="6">Total: {newNota.length}</Td>
+                  </Tr>
+                </Tfoot>
               </Table>
             </Box>
           )

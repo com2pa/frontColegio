@@ -61,9 +61,6 @@ const LoginForm = ({ handleShow }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-
-
-
     try {
       const user = {
         user_id: 1,

@@ -1,7 +1,11 @@
 import { Box, Button, ButtonGroup, Card, Flex, FormControl, FormLabel, Heading, Input, Select, Table, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useToast,} from '@chakra-ui/react';
 import axios from 'axios';
 import React, {useEffect, useState } from 'react';
+import { FcPrint } from 'react-icons/fc';
 import { LuNewspaper } from 'react-icons/lu';
+import { pdf } from '@react-pdf/renderer';
+import NoteListPDF from '../components/NoteListPDF';
+
 
 export const ListNote = ({selectedDegree}) => {
   // console.log('...',selectedDegree);
@@ -12,6 +16,7 @@ export const ListNote = ({selectedDegree}) => {
   const [assignment, setAssignment]=useState('');
   const [ponderacion, setPonderacion]=useState('');
   const [isLoading , setIsLoading] =useState('');
+  // const [selectedDegreeNotes, setSelectedDegreeNotes] = useState([]);
   // guardo la nota del estudiante nombre tema materia ...
   const [newNota,setNewNota]=useState([]);
   // observo que se guarde...
@@ -90,6 +95,8 @@ export const ListNote = ({selectedDegree}) => {
       try {
         const response = await axios.get('/api/note');
         setNewNota(response.data);
+        // const filteredNotes = response.data.filter(note => note.degree.id === selectedDegree.id);
+        // setNewNota(filteredNotes);
       } catch (error) {
         // console.log(error);
         toast({
@@ -103,9 +110,28 @@ export const ListNote = ({selectedDegree}) => {
       }
     };
     fetchNota();
-  },[toast,setNewNota]);
+  },[toast,setNewNota,]);
 
+  // pdf
+  const handlePrintPdf = async () => {
+    try {
+      const pdfBlob = await pdf(
+        <NoteListPDF notes={newNota} />
+      ).toBlob();
 
+      const fileURL = URL.createObjectURL(pdfBlob);
+      window.open(fileURL);
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: 'Error al generar el PDF',
+        description: 'Hubo un error al generar el PDF.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
   
   return (
     <>
@@ -222,11 +248,7 @@ export const ListNote = ({selectedDegree}) => {
           w="100%"
           p={8}
           gap={8}
-                    
-        
         >
-      
-
           <FormControl>
             <Flex
               flexDir={{sm:'row',md:'row'}}
@@ -260,35 +282,78 @@ export const ListNote = ({selectedDegree}) => {
       {/* Listado de notas */}
       {
         selectedDegree.students.length === 0 ? (
-          <Text>No hay estudiantes en este grado</Text>
-        ) : newNota.length === 0 ? (
-          <Text>No hay notas disponibles para este grado</Text>
-        ) : (
-          <Box w='100%' p={8}>
-            <Heading>Notas</Heading>
-            <Table variant="striped" size="sm">
-              <Thead>
-                <Tr>
-                  <Th>N°</Th>
-                  <Th>Alumno</Th>
-                  <Th>Asignatura</Th>
-                  <Th>Tema</Th>
-                  <Th>tipo</Th>
-                  <Th>Nota</Th>
-                  {/* <Th>Acción</Th> */}
-                </Tr>
-              </Thead>
-              <Tbody>
-                {newNota.map((note, index) => (
-                  <Tr key={index}>
-                    <Td>{index + 1}</Td>
-                    <Td>{note.students.name}{note.students.lastname}</Td>
-                    <Td>{note.subject.name}</Td>
-                    <Td>{note.assignment.name}</Td>
-                    <Td>{note.assignment.tipo}</Td>
-                    <Td>{note.ponderacion}</Td>
-                    <Td>
-                      {/* <ButtonGroup>
+          <Text
+            as='b'
+            textAlign={'center'}
+            color={'red'}
+            m={8}
+            fontSize={20}
+          
+          >No hay estudiantes en este grado</Text>
+        ) : newNota.length === 0 ? 
+          (
+            <Text>No hay notas disponibles para este grado</Text>
+          ) 
+          : 
+          (
+            <Box w='100%' >
+              <Heading
+                textAlign={'center'}
+                color={'black'}
+                fontWeight={'bold'}
+                m={8}
+                fontSize={20}
+              >Notas {selectedDegree.degree}° grado</Heading>
+              <Flex>
+                <ButtonGroup>
+                  <Button                    
+                    bgGradient={'linear(to-l, #6066FA, yellow)'}
+                    color={"white"}                    
+                    w={'100%'}
+                    leftIcon={<FcPrint fontSize={40}/>}
+                    onClick={handlePrintPdf}
+                    m={4}
+                  >
+                  Pdf
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+              <Table 
+                variant="striped" 
+                size="base"                
+                fontSize={{base:'10',md:'15',lg:'20'}}
+                borderCollapse="collapse"
+                boxShadow="lg"
+                p={'0'}
+                m={4}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="lg"          
+                width={{base:'40%',md:'60%',lg:'80%'}}
+              >
+                <Thead
+                  bgGradient={'linear(to-l, #6066FA, yellow)'}
+                >
+                  <Tr>
+                    <Th>N°</Th>
+                    <Th>Alumno</Th>
+                    <Th>Asignatura</Th>
+                    <Th>Tema</Th>
+                    <Th>tipo</Th>
+                    <Th>Nota</Th>                  
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {newNota.map((note, index) => (
+                    <Tr key={index}>
+                      <Td>{index + 1}</Td>
+                      <Td>{note.students.name}{note.students.lastname}</Td>
+                      <Td>{note.subject.name}</Td>
+                      <Td>{note.assignment.name}</Td>
+                      <Td>{note.assignment.tipo}</Td>
+                      <Td>{note.ponderacion}</Td>
+                      <Td>
+                        {/* <ButtonGroup>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -305,13 +370,16 @@ export const ListNote = ({selectedDegree}) => {
                           disabled={isLoading}
                         >..</Button>
                       </ButtonGroup> */}
-                    </Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </Box>
-        )
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
+          )
+          // :(
+          //   <Text>No hay notas disponibles para este grado</Text>
+          // )
       }
 
     </>

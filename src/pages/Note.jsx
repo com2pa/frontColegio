@@ -42,8 +42,9 @@ export const Note = () => {
       >Notas por grado</Heading>
             
       <Grid 
-        templateColumns="repeat(3, 1fr)" 
+        // templateColumns="repeat(3, 1fr)" 
         gap={4}
+        gridTemplateColumns={["auto auto "]} 
       >
         {degree.map((degree) => (
           <GridItem key={degree._id}>
@@ -67,19 +68,7 @@ export const Note = () => {
                     as='b'
 
                   >{degree.degree}° grado</Text>
-                  {/* {degree.students && degree.students.length > 0 ? (
-                  <List>
-                    {degree.students.map((student) => (
-                      <ListItem key={student._id}>
-                       c
-                      </ListItem>
- 
-                    ))}
-                  </List>
-                ) : (
-                  <Text>No hay estudiantes en este grado.</Text>
-                )}            */}
-
+              
                 </Flex>
                 <Flex
                   justifyContent={'center'}

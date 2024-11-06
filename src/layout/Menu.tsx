@@ -36,14 +36,14 @@ export  function Menu() {
       <Outlet />
       <Box>
       <Flex
-        bg={useColorModeValue('yellow.400', 'black.300')}
+        bg={useColorModeValue('#FFD700', 'black.300')}
         color={useColorModeValue('red.600', 'black.300')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('yellow.100', 'black.300')}
+        borderColor={useColorModeValue('#FFD700', 'black.300')}
         align={'center'}>
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -176,7 +176,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         alignItems="center"
         _hover={{
           textDecoration: 'none',
-          bgColor: useColorModeValue('yellow', 'white.200'),
+          bgColor: useColorModeValue('#FFD700', 'white.200'),
           
         }}>
         <Text 
@@ -245,26 +245,26 @@ const NAV_ITEMS: Array<NavItem> = [
     //   },
     // ],
   },
-  {
-    label: 'Grados',
-    // href: '/news',
+  // {
+  //   label: 'Grados',
+  //   // href: '/news',
     
-    children: [
-      {
-        label: 'Primaria',
-        subLabel: '1°er hasta 6to grado',
-        href: '#',
-      },
-      {
-        label: 'Graduates',
-        subLabel: 'Master of Arts',
-        href: '#',
-      },
-    ],
-  },
+  //   children: [
+  //     {
+  //       label: 'Primaria',
+  //       subLabel: '1°er hasta 6to grado',
+  //       href: '#',
+  //     },
+  //     {
+  //       label: 'Graduates',
+  //       subLabel: 'Master of Arts',
+  //       href: '#',
+  //     },
+  //   ],
+  // },
   {
     label: 'Quienes Somos',
-    href: '/about',
+    href: '/somos',
   },
   {
     label: 'Sesion',

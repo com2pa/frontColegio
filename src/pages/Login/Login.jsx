@@ -11,12 +11,15 @@ import {
   Input,
   Stack,
   Image,
-  useToast,
+  useToast, 
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Menu from'../../layout/Menu';
+import Footer from'../../layout/Footer';
+
 const REGEX_EMAIL = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const REGEX_PASS = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,15}$/;
 
@@ -118,44 +121,70 @@ export const SplitScreen=()=> {
 
   };
   return (
+    <>
+      <Flex flexDir="column" gap={8} p={8} maxW="90rem" mx="auto">
+        <Menu />   
+        <Stack 
+          minH={'60vh'} 
+          direction={{ base: 'column', md: 'row' }}>
+          <Flex p={8} flex={1} align={'center'} justify={'center'}>
+            <Stack spacing={4} w={'full'} maxW={'md'}>
+              <Heading 
+                fontSize={{sm:'2rem',md:'2xl'}}
+                textAlign={'center'}
+              >
+          ¡Bienvenido a nuestra plataforma! Inicia sesión para acceder a tu cuenta.
+              </Heading>
+              <FormControl id="email">
+                <FormLabel>Direccion de correo Electrónico</FormLabel>
+                <Input type="email" onChange={handleEmailInput} />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Contraseña</FormLabel>
+                <Input type="password" onChange={handlePassword}/>
+              </FormControl>
+              <Stack spacing={6}>
+                <Stack
+                  direction={{ base: 'column', sm: 'row' }}
+                  align={'start'}
+                  justify={'space-between'}>
+                  <Checkbox>Recuerdame</Checkbox>
+                  <Text color={'blue.500'}>Olvidas tu contraseña?</Text>
+                </Stack>
+                <Button 
+                  colorScheme={'blue'} 
+                  variant={'solid'} 
+                  onClick={handleLogin} 
+                  isDisabled={!isLoginValid} 
+                  isLoading={!isLoading}
+                  loadingText='En espera de inicio de sesion...'
 
-
-    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-      <Flex p={8} flex={1} align={'center'} justify={'center'}>
-        <Stack spacing={4} w={'full'} maxW={'md'}>
-          <Heading fontSize={'2xl'}>Sign in to your account</Heading>
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input type="email" onChange={handleEmailInput} />
-          </FormControl>
-          <FormControl id="password">
-            <FormLabel>Password</FormLabel>
-            <Input type="password" onChange={handlePassword}/>
-          </FormControl>
-          <Stack spacing={6}>
-            <Stack
-              direction={{ base: 'column', sm: 'row' }}
-              align={'start'}
-              justify={'space-between'}>
-              <Checkbox>Remember me</Checkbox>
-              <Text color={'blue.500'}>Forgot password?</Text>
+              
+                >
+              Iniciar sesion
+                </Button>
+              </Stack>
             </Stack>
-            <Button colorScheme={'blue'} variant={'solid'} onClick={handleLogin} isDisabled={!isLoginValid} isLoading={!isLoading}>
-              Sign in
-            </Button>
-          </Stack>
+          </Flex>
+          <Flex 
+            flex={1}
+            align={'center'}
+            justify={'center'}
+          >
+            <Image
+              alt={'Login Image'}
+              objectFit={'cover'}
+              // h={'50%'}
+              
+              src={
+                'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
+              }
+            />
+          </Flex>
         </Stack>
+        <Footer/>
       </Flex>
-      <Flex flex={1}>
-        <Image
-          alt={'Login Image'}
-          objectFit={'cover'}
-          src={
-            'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
-          }
-        />
-      </Flex>
-    </Stack>
+    </>
   );
 };
 

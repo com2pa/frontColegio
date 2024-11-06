@@ -86,19 +86,28 @@ export const ListSubjects = ({id,subject,handleDelete,handleEditSubject}) => {
         key={id}
         p={5}
         borderWidth="1px"
-        borderRadius="lg"
-        mb={5}
+        borderRadius="lg"        
         justifyContent="space-between"
+        mt={5}
+        bgGradient={'linear(to-l, #6066FA, yellow)'}
       >
-        <Flex>
+        <Flex
+          flexDir={{base:'column',md:'row',lg:'row'}}
+          w={'100%'}
+        >
           <Input
             type='text'
             value={name}
             readOnly={isInputActive ? true: false}
             borderWidth={isInputActive ? '2px' : '0px'}
             onChange={({target})=>setName(target.value)}
+            textAlign={'center'}
           />
-          <Flex>
+          <Flex
+            w="100%"
+            justifyContent="space-evenly"
+            
+          >
             <ButtonGroup>                    
               <IconButton
                 onClick={handleEdit} 

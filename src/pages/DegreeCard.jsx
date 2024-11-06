@@ -1,13 +1,9 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import {  Button, ButtonGroup, Card, Flex, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, } from '@chakra-ui/react';
-import { useState } from 'react';
+import {  Button, ButtonGroup, Card, Flex, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, } from '@chakra-ui/react';
 
-
-// import React, { useState } from 'react';
 
 export const DegreeCard = ({degree,handleDeleteDegree}) => {
-  // const [isInputActive, ]= useState(false);
-  // const [degreee ,setDegree]= useState(degree.degree);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -16,10 +12,15 @@ export const DegreeCard = ({degree,handleDeleteDegree}) => {
         key={degree.id} 
         // mt={5} 
         p={7}
+        w='100%'
+        bgGradient={'linear(to-l, #6066FA, yellow)'}
        
       >
         <Flex 
-          justifyContent={{md:'space-evenly'}}
+          justifyContent='space-between'
+          alignItems='center'
+         
+          
         > 
           {/* <Input 
             type='number'
@@ -34,6 +35,8 @@ export const DegreeCard = ({degree,handleDeleteDegree}) => {
                 icon={<DeleteIcon/>}
                 //   onClick={()=>handleDeleteDegree(degree)}
                 onClick={onOpen}
+                color="white"
+                bg="red.600"
               />
 
             </ButtonGroup>
@@ -44,21 +47,37 @@ export const DegreeCard = ({degree,handleDeleteDegree}) => {
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>¡ Advertencia !</ModalHeader>
+          <ModalHeader
+            fontSize={'2rem'}
+            fontWeight={'bold'}
+            color={'red'}
+            shadow={'dark-lg'}
+            textAlign={'center'}
+
+          >¡ Advertencia !</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Text>¿Estas seguro de eliminar el grado de {degree.degree}?</Text>
+            <Text
+              fontSize={'1.2rem'}
+              fontWeight={'bold'}
+              textAlign={'center'}
+              mt={4}
+
+            >¿Estas seguro de eliminar el grado de {degree.degree}?</Text>
           </ModalBody>
 
           <ModalFooter>
             <Button 
-              colorScheme='blue' 
+              colorScheme='green' 
               mr={3}
               onClick={() => handleDeleteDegree(degree)}
             >
                 Borrar
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button 
+              onClick={onClose}
+              colorScheme='red'
+            >Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

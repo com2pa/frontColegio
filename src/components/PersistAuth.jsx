@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Center, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import {BookLoader} from "react-awesome-loaders-py3";
 
 const PersistAuth = () => {
   const location = useLocation();
@@ -30,11 +31,24 @@ const PersistAuth = () => {
 
   //CUANDO CARGARDO EL USUARIO
   if (isLoading) {
-    return <Center margin="5rem" flexDirection="column"> <Card padding="2rem 5rem" background="gray.500" > <Heading> Cargando</Heading><Flex justify="center" mt="1rem"><Text> Aguarde unos  Minutos !</Text><Spinner size='md' color="red.600"/></Flex> </Card></Center>;
- 
+    // return <Center margin="5rem" flexDirection="column"> <Card padding="2rem 5rem" background="gray.500" > <Heading> Cargando</Heading><Flex justify="center" mt="1rem"><Text> Aguarde unos  Minutos !</Text><Spinner size='md' color="red.600"/></Flex> </Card></Center>;
+    return (
+      <Center margin="5rem" flexDirection="column">
+
+        <BookLoader
+          text="Aguarde unos minutos.."
+          background={"linear-gradient(135deg, #6066FA, yellow)"}
+          desktopSize={"100px"}
+          mobileSize={"80px"}
+          textColor={"yellow"}
+          // size="64px"
+        
+        />
+      </Center>
+    );
   }
 
-  //cuando estoy en home
+  //cuando estdoy en home
   if (location.pathname === '/') {
     if (auth?.name) {
       return <Navigate to='/dashboard' state={{ from: location }} replace />;

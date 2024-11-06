@@ -13,16 +13,23 @@ export const StudentList = ({studentsRegistrations}) => {
   return (
     <Card
       key={studentsRegistrations.id}
-      m={4}
+      bgGradient={'linear(to-l, #6066FA, yellow)'}
+      w='100%'
+
+     
     >
-      <Flex w="100%" flexDir={{base:'column',md:'row'}}>
-        <Flex w="50%">
+      <Flex 
+        w="100%"
+      >
+        
+        <Flex w="50%"  >
           <Input
             type='text'
             readOnly={isInputActive ? true: false}
             value={name}
             borderWidth={isInputActive? '2px' : '0px'}
             onChange={({target})=>setName(target.value)}
+            textAlign={'center'}
           />
         </Flex>
         <Flex w="50%">
@@ -32,12 +39,10 @@ export const StudentList = ({studentsRegistrations}) => {
             value={lastname}
             borderWidth={isInputActive? '2px' : '0px'}
             onChange={({target})=>setLastname(target.value)}
+            textAlign={'center'}
+
           />
         </Flex>
-        
-
-
-            
       </Flex>
       <Flex w="100%" flexDir={{base:'column',md:'row'}}>
         <Flex w="50%">
@@ -47,26 +52,25 @@ export const StudentList = ({studentsRegistrations}) => {
             value={sex}
             borderWidth={isInputActive? '2px' : '0px'}
             onChange={({target})=>setSex(target.value)}
+            textAlign={'center'}
+
           />
         </Flex>
-        <Flex w="50%">
+        <Flex w="50%"
+        >
           <Input
             type='number'
             readOnly={isInputActive? true: false}
             value={age}
             borderWidth={isInputActive? '2px' : '0px'}
             onChange={({target})=>setAge(target.value)}
+            textAlign={'center'}
+
           />
         </Flex>
-        
-
-
-            
       </Flex>
       <Flex w="100%" flexDir={{base:'column',md:'row'}}>
-        {/* <CheckboxGroup>
-
-        </CheckboxGroup> */}
+  
             
       </Flex>
       

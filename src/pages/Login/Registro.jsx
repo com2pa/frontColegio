@@ -296,18 +296,21 @@ export const SignupCard=()=> {
                   }
                 </FormControl>
                 <Stack spacing={10} pt={2}>
-                  <Button
-                    // size="lg"
-                    colorScheme={'blue'} 
-                    // color={'white'}
-                    variant={'solid'} 
-                    // _hover={{
-                    //   bg: 'blue.500',
-                    // }}
+                  <Button                    
+                    colorScheme={'blue'}
+                    variant={'solid'}
                     onClick={handleNewUser}
-                    isDisabled={!isLoginValid} 
-                    isLoading={!isLoading}
-                    loadingText='En espera...'
+                    isDisabled={
+                      !nameValidation || 
+                      !lastNameValidation || 
+                      !phoneValidation || 
+                      !cedulaValidation ||
+                      !emailValidation || 
+                      !addressValidation || 
+                      !passwordValidation 
+                    } 
+                    // isLoading={!isLoading}
+                    // loadingText='En espera...'
 
                   >
                 Resgistro

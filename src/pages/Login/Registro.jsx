@@ -56,8 +56,7 @@ export const SignupCard=()=> {
 
   const [password, setPassword] = useState('');
   const [passwordValidation, setPasswordValidation] = useState(false);
-  const [isLoginValid, setIsLoginValid] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleNameInput =({target})=>{
     setName(target.value);
@@ -83,14 +82,7 @@ export const SignupCard=()=> {
     setPassword(target.value);
   };
 
-  useEffect(() => {
-    if (isLoginValid) {
-      setIsLoading(false);
-    } else {
-      setIsLoading(true);
-    }
-  }, [isLoginValid]);
-  
+ 
   useEffect(()=>{
     setNameValidation(REGEX_NAME.test(name));
   },[name]);
@@ -118,7 +110,6 @@ export const SignupCard=()=> {
     try {
       const {data}= await axios.post('/api/users',{name,lastname,phone,email,cedula,address,password});
       console.log('creado! ',data);
-      setIsLoginValid(false);
       toast({
         position:'top',
         title: 'Success',
@@ -137,8 +128,7 @@ export const SignupCard=()=> {
       setPassword('');
 
     } catch (error) {
-      // console.log(error);
-      setIsLoading(false);
+      // console.log(error);   
       toast({
         position:'top',
         title: 'Error',
@@ -309,9 +299,6 @@ export const SignupCard=()=> {
                       !addressValidation || 
                       !passwordValidation 
                     } 
-                    // isLoading={!isLoading}
-                    // loadingText='En espera...'
-
                   >
                 Resgistro
                   </Button>

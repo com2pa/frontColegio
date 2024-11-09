@@ -110,11 +110,9 @@ export const CardAssignments = ({assignment,handleDelete}) => {
           </li>
         </List>
         <Button 
-          onClick={() => handleDelete(assignment._id)}
+          onClick={() => handleDelete(assignment.id)}
           colorScheme="red"
           size="sm"
-          isDisabled={assignment.isAssigned}
-          
         >Borrar</Button>
       </Card>
     </>

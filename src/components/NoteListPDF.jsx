@@ -4,18 +4,19 @@ const NoteListPDF = ({ notes }) => {
   const styles = StyleSheet.create({
     page: {
       flexDirection: 'column',
-      backgroundColor: '#E4E6EF',
-      padding: 20,
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
+      backgroundColor: '#FFFFFF',
+      padding: 15,
     },
     header: {
-      fontSize: 18,
+      fontSize: 12,
       fontWeight: 'bold',
       marginBottom: 20,
+      textAlign: 'center',
+    },
+    footer: {
+      fontSize: 10,
+      marginTop: 20,
+      textAlign: 'center',
     },
     table: {
       display: 'table',
@@ -24,6 +25,7 @@ const NoteListPDF = ({ notes }) => {
       borderWidth: 1,
       borderRightWidth: 0,
       borderBottomWidth: 0,
+      fontSize:12
     },
     tableRow: {
       margin: 'auto',
@@ -36,12 +38,38 @@ const NoteListPDF = ({ notes }) => {
       borderLeftWidth: 0,
       borderTopWidth: 0,
       padding: 5,
+      backgroundColor: '#F2F2F2',
     },
   });
+  const Header = () => (
+    <View style={{ 
+      marginBottom: 10,
+      backgroundColor: '#6066FA',
+      padding: 10,
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    }}>
+      <Text style={{ 
+        fontSize: 9, 
+        fontWeight: 'bold', 
+        textAlign: 'center',
+      }}>
+        Colegio XYZ
+      </Text>
+      <Text style={{ fontSize: 9, textAlign: 'center' }}>
+        Dirección del Colegio 
+      </Text>
+      <Text style={{ fontSize: 9, textAlign: 'center' }}>
+        Teléfono: (123) 456-7890
+      </Text>
+    </View>
+  );
 
   return (
     <Document>
-      <Page size="A4" style={styles.page}>
+      <Page size="Letter" style={styles.page}>
+        <Header />
         <View style={styles.section}>
           <Text style={styles.header}>Notas</Text>
           <View style={styles.table}>
@@ -65,7 +93,11 @@ const NoteListPDF = ({ notes }) => {
             ))}
           </View>
         </View>
+        <Text style={styles.footer}>
+          Generado el {new Date().toLocaleDateString()}
+        </Text>
       </Page>
+      
     </Document>
   );
 };

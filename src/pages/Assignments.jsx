@@ -26,9 +26,8 @@ export const Assignments = () => {
   const toast=useToast();
 
   const[assignment, setAssignment]= useState([]);
+  // console.log(assignment,'asignacion');
 
-
-  
   // mostrando los grados
   useEffect(()=>{
     const FechDegree=async()=>{
@@ -72,8 +71,7 @@ export const Assignments = () => {
  
 
   // enviar 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async () => {    
     // console.log('Selected Subject:', subjectSelected);
     try {
       const {data}= await axios.post('/api/assignment', {
@@ -90,8 +88,6 @@ export const Assignments = () => {
         status:'success',
         isClosable:true,
         duration: 3000,
-
-
       });
       // alert('Actividad agregada exitosamente');
       setName('');
@@ -112,18 +108,21 @@ export const Assignments = () => {
     }
   };
   // eliminar la asignatura
-  const handleDelete=async(id)=>{
+  const handleDelete=async(id)=>{   
+    // console.log('eliminando la actividad!!',assignment.id);
+    
     try {
-      await axios.delete(`/api/assignment/${id}`);
+      const borrado = await axios.delete(`/api/assignment/${id}`);
+      // console.log(borrado);
       toast({
         title: 'Actividad eliminada correctamente',
-        description: 'La actividad ha sido eliminada exitosamente',
+        description: 'La actividad ha sido eliminada exitosamente',borrado,
         status:'success',
         isClosable:true,
         duration: 3000,
       });
-      // alert('Actividad eliminada correctamente');
-      setAssignment(assignment.filter(item => item._id!== id));
+      // Actualizar el estado de las asignaciones para mostrar la lista actualizada
+      setAssignment(assignment.filter(item => item.id !== id));
     } catch (error) {
       console.log(error);
       toast({

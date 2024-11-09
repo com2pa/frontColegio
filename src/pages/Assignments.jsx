@@ -4,7 +4,6 @@
 import React, { useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
 import { Box, Button, Card, Checkbox, CheckboxGroup, Flex, FormControl, FormHelperText, FormLabel, Heading, Img, Input, List, Select, Stack, Text, useToast } from '@chakra-ui/react';
-import dos from '../assets/2.png';
 import { useEffect } from 'react';
 import axios from 'axios';
 import CardAssignments from './CardAssignments';

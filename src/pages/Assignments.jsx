@@ -3,7 +3,7 @@
 // lapso, grado, materia, nombre de la actividad , que tipo de actividad 
 import React, { useState } from 'react';
 import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader';
-import { Box, Button, Card, Checkbox, CheckboxGroup, Flex, FormControl, FormHelperText, FormLabel, Heading, Img, Input, List, Select, Stack, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, Card, Checkbox, CheckboxGroup, Flex, FormControl, FormHelperText, FormLabel, Heading, Input, List, Select, Stack, Text, useToast } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import CardAssignments from './CardAssignments';
@@ -232,7 +232,6 @@ export const Assignments = () => {
             </Flex>
             <Flex
               w="50%"
-            
             >
               <FormControl>
                 <FormLabel>Tema(de la actividad)</FormLabel>
@@ -250,11 +249,8 @@ export const Assignments = () => {
             p={8}
             gap={8}
           >
-
-        
             <Flex
-              w="100%"
-         
+              w="100%"         
             >
               <FormControl>
                 <FormLabel>actidades</FormLabel>
@@ -272,7 +268,7 @@ export const Assignments = () => {
                   dibujo,
                   maqueta,
                   ejercicio,
-                </FormHelperText>                
+                </FormHelperText>                       
               </FormControl>
             </Flex>
           </Flex>
@@ -280,16 +276,7 @@ export const Assignments = () => {
         <Button 
           variant="solid" 
           size="md" 
-          colorScheme="blue"
-          // onClick={()=>
-          //   console.log('creando actividad!!',
-          //     lapso,
-          //     name,
-          //     tipo,              
-          //     selectedDegree
-          //     selectedSuject,
-
-          //   )}
+          colorScheme="blue"      
           onClick={handleSubmit}
           isDisabled={ 
             !name || 
@@ -313,22 +300,16 @@ export const Assignments = () => {
             textAlign='center'
             mt={5}
           >Asignaciones</Heading>
-          
           {assignment.map((assignment) => (
-           
             <List
               key={assignment.id}  
             >                        
-              <CardAssignments
-                
+              <CardAssignments                
                 assignment={assignment}
-                handleDelete={handleDelete}            
-
+                handleDelete={handleDelete}   
               />
-            </List>
-            
-          ))}
-          
+            </List>            
+          ))}          
         </Box>
       </Flex>
         

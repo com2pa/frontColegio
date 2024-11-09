@@ -215,12 +215,17 @@ export const FormRegistrationStudent = () => {
                 <FormLabel fontSize={{base:12}} w="100%">Sexo </FormLabel>
                 <Input 
                   type='text' 
-                  placeholder="ingrese el sexo" 
+                  placeholder="ingrese el sexo niño o niña" 
                   size="sm"
                   onChange={handleGeneroInput}    
                   value={sex}
                 />
               </Flex>
+              {!sexValidation? '':(
+                <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
+                  <p>Escriba niño o niña!</p>
+                </FormHelperText>
+              )}
             </FormControl>
            
             <FormControl isInvalid={!ageValidation && age}>
@@ -234,6 +239,13 @@ export const FormRegistrationStudent = () => {
                   value={age}
                 />
               </Flex>
+              <FormHelperText>
+                {!ageValidation? '': (
+                  <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
+                    <p>Debe ser un numero entero positivo!</p>
+                  </FormHelperText>
+                )}                
+              </FormHelperText>
             </FormControl>
           </Flex>
           <Flex 

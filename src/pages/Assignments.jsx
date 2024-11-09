@@ -263,7 +263,17 @@ export const Assignments = () => {
                   type='text'
                   value={tipo}
                   onChange={(e)=>setTipo(e.target.value)} 
-                />                
+                />
+                <FormHelperText>actividades como : 
+                  individual,
+                  grupal,
+                  exposicion,
+                  examen, 
+                  trabajo escrito,
+                  dibujo,
+                  maqueta,
+                  ejercicio,
+                </FormHelperText>                
               </FormControl>
             </Flex>
           </Flex>
